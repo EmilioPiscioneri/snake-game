@@ -69,14 +69,6 @@ class grid():
         if (type(realCoords) != tuple):
             raise Exception("ERROR: realCoords is not a tuple")
         
-        # Only need to do + 1 on y
-
-        if realCoords[0] < 0: # x negative
-            realCoords = (realCoords[0]+1, realCoords[1])
-
-        if realCoords[1] < 0: # y negaative
-            realCoords = (realCoords[0], realCoords[1]+1)
-        
         # // is floor divison. This means the result pf the division is rounded down to nearest whole number always.
         # do floor for positive numbers and ceil for negative 
         # do tilesize + 1 becuase it needs to from -1 to -tileSize -1
@@ -89,7 +81,7 @@ class grid():
             tileCoords = (realCoords[0] // tileSize, realCoords[1])
 
         if realCoords[1] < 0: # y negative
-            tileCoords = (tileCoords[0], math.ceil(realCoords[1]/ (tileSize+1)))
+            tileCoords = (tileCoords[0], math.ceil(realCoords[1] / (tileSize+1)))
         elif realCoords[1] > 0: # y positive
             tileCoords = (tileCoords[0], realCoords[1] // tileSize)
 
