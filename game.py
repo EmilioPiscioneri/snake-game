@@ -61,38 +61,46 @@ class grid():
             self.errorOnCreation = True
             return None
         
-        self.tileSize = tileSize # Set the tile size.
+        self.tileSize = tileSize # Set the til size.
 
     # returns tile coordinates which real coordihnates are in. Must be a tuple
     def realToTileCoords(self, realCoords : tuple) -> tuple:
-        #type check
-        if (type(realCoords) != tuple):
-            raise Exception("ERROR: realCoords is not a tuple")
+         #type check
+       if (type(realCoords) != tuple):
+           raise Exception("ERROR: realCoords is not a tuple")
         
         # // is floor divison. This means the result pf the division is rounded down to nearest whole number always.
         # do floor for positive numbers and ceil for negative 
         # do tilesize + 1 becuase it needs to from -1 to -tileSize -1
+       tileCoords : tuple = (0,0) # default to 0,0
 
-        tileCoords : tuple = (0,0) # default to 0,0
+       if realCoords[0] < 0: # x negative
+           tileCoords = (math.ceil(realCoords[0] / (tileSize)), realCoords[1])
+       if realCoords[0] > 0: # x positive
+           tileCoords = (realCoords[0] // tileSize, realCoords[1])
+       if realCoords[1] < 0: # y negative
+           tileCoords = (tileCoords[0], math.ceil(realCoords[1] / (tileSize)))
+       elif realCoords[1] > 0: # y positive
+           tileCoords = (tileCoords[0], realCoords[1] // tileSize)
 
-        if realCoords[0] < 0: # x negative
-            tileCoords = (math.ceil(realCoords[0] / (tileSize+1)), realCoords[1])
-        if realCoords[0] > 0: # x positive
-            tileCoords = (realCoords[0] // tileSize, realCoords[1])
-
-        if realCoords[1] < 0: # y negative
-            tileCoords = (tileCoords[0], math.ceil(realCoords[1] / (tileSize+1)))
-        elif realCoords[1] > 0: # y positive
-            tileCoords = (tileCoords[0], realCoords[1] // tileSize)
-
-
-        return tileCoords
+       return tileCoords
 
     # Returns tile coords converted to real
     def tileCoordsToReal(self, tileCoord : tuple) ->tuple:
-        realCoord = numpy.multiply(tileCoord, tileSize)
+       realCoord : tuple = (0,0) # initiate
+       
 
-        return realCoord
+       if(tileCoord[0] < 0): # x negative
+           realCoord = (tileCoord[0] * 10, realCoord[1])
+       elif(tileCoord[0] > 0): # x positive
+           realCoord = (tileCoord[0] * 10 - 1, tileCoord[1])
+			 
+       if(tileCoord[1] < 0): # y negative
+           realCoord = (realCoord[0],tileCoord[1] * 10)
+       elif(tileCoord[1] > 0): # y positive
+           realCoord =  (realCoord[0], tileCoord[1] * 10 - 1)
+
+       return realCoord
         
 
 
@@ -102,7 +110,10 @@ gameMap = grid(tileSize)
 
 if (gameMap.errorOnCreation):
     print("!! There was an error creating the map !!")
-tileCoords = gameMap.realToTileCoords((15,15))
+
+inpCoords = (30,19) # input coordinates
+print("input coords: (" + str(inpCoords[0]) + ", " + str(inpCoords[1]) +")")
+tileCoords = gameMap.realToTileCoords(inpCoords)
 print(tileCoords)
 realCoords = (gameMap.tileCoordsToReal(tileCoords))
 print(realCoords)
