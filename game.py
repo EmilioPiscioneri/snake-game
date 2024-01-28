@@ -215,6 +215,7 @@ class snake():
             # print("drawing a rect")
             pygame.draw.rect(screen, self.colour, snakeRect)
 
+
             # setup next move
             
     # renders the length of the snake text
