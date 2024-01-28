@@ -1,5 +1,5 @@
 # snake-game
-Python snake game using gpygame. Justlearnning python
+Python snake game using pygame. Just learnning python
 
 ## Important notes
 * tile coordinates start from bottom left
