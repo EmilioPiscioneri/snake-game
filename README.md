@@ -1,4 +1,4 @@
-# snake-game
+# Snake game
 Python snake game using pygame. Just learnning python
 
 ## Important notes
