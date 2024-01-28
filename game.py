@@ -211,6 +211,7 @@ class snake():
 
             # print("Snake index: "+str(lengthIndex)+" with position ("+str(rectPosition[0])+","+str(rectPosition[1])+")")
             snakeRect = pygame.Rect(rectPosition[0], rectPosition[1], tileSize, tileSize)
+            # test
 
             # print("drawing a rect")
             pygame.draw.rect(screen, self.colour, snakeRect)
