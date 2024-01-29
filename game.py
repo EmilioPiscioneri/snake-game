@@ -255,6 +255,8 @@ class snake():
         # print("rendering")
         # pygame.draw.rect(screen, self.colour, pygame.Rect(0,0,100,100))
         # type check
+        screen = self.screen
+        tileSize = gameMap.tileSize;
         if (type(screen) != pygame.surface.Surface):
             raise Exception("ERROR: didn't pass a valid screen arg")
         if (type(tileSize) != int):
